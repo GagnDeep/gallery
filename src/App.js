@@ -1,28 +1,52 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
-
+import Layout from './components/layout/layout'
+import imagess from './assets/jotImages/jotJSON';
+let images = Array.from(new Set(imagess))
+// console.log(images[0])
 class App extends Component {
+  state = {
+      backgroundImage: getRandomImage()
+    }
   render() {
+    // let imgs = images.map(el => {return (<img src = {el}/>)})
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+      
+        <Layout img = {this.state.backgroundImage} nextClickHandler = {this.nextClickHandler} previousClickHandler = {this.previousClickHandler}>
+            
+        </Layout>
+      
     );
+    
   }
+  nextClickHandler = () => {
+      let url = this.state.backgroundImage;
+      let i = images.findIndex(el=>el===url);
+      clearInterval(this.interval);
+      this.setState({
+        backgroundImage: images[(i+1)%(images.length-1)]
+      })
+  }
+  previousClickHandler = () => {
+      let url = this.state.backgroundImage;
+      let i = images.findIndex(el=>el===url);
+      if(i === 0) i+=images.length-1
+      clearInterval(this.interval);
+      this.setState({
+        backgroundImage: images[+(i-1)%(images.length-1)]
+      })
+      console.log(i,+((i-1)%(images.length-1)))
+  }
+  componentDidMount(){
+    this.interval = setInterval(this.changeBackground,3000)
+  }
+  changeBackground = ()=>{
+      this.setState({
+        backgroundImage: getRandomImage()
+      })
+    }
+}
+function getRandomImage(){
+  return images[Math.floor(Math.random()*images.length)];
 }
 
 export default App;

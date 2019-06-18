@@ -1,0 +1,64 @@
+.outsideContainer{
+    display:flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.Container{
+    background: #ccc;
+    height:100vh;
+    width: 49vw;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position:center;
+    transition:background-image 1s ease-in-out;
+}
+.Footer{
+    position: relative;
+    align-self: flex-end;
+    height: 50vh;
+    width: 49vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    background-size:cover;
+    background-position: center;
+    align-items:center;
+}
+.FooterBackground{
+        top: 0;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    filter: blur(20px);
+    z-index:-1;
+}
+.Previous, .Next{
+    z-index:1;
+    outline: none;
+    height: 150px;
+    width: 150px;
+    background: #ccc;
+    border: 1px solid white;
+    border-radius: 50%;
+    font-size: 1rem;
+    font-weight: bold;
+    color: black;
+    
+}
+.Previous:hover, .Next:hover{
+    background:white;
+    color:black;
+    border:1px solid black;
+}
+@media(max-width:500px){
+    .Header{
+        font-size:2rem;
+    }
+    .Previous, .Next{
+    
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+}
